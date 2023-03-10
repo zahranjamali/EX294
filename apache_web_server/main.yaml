@@ -1,0 +1,21 @@
+- name: Apache web server
+  hosts: localhost
+  vars:
+    - packageName: "httpd"
+    - x: 5
+    - webPage: "sameer.html"
+  tasks:
+    - debug:
+        msg: "all set to {{ x }} go"  #string interpolation
+    - name: Install httpd
+      ansible.builtin.package:
+        name: "{{packageName}}"
+        state: present
+    - name: Ensure Copying sameer.html
+      ansible.builtin.copy: # copy module has been paramaterized
+        src: "{{ webPage }}" # pagename is a parameter
+        dest: /var/www/html/
+    - name: Start service httpd, if not started
+      ansible.builtin.service:
+        name: httpd
+        state: started
