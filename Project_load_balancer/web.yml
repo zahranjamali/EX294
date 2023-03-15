@@ -11,5 +11,5 @@
         dest: "/var/www/html/"
     - service:
         name: "httpd"
-        state: "started"
+        state: "restarted"
         enabled: true
