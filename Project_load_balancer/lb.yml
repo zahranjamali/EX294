@@ -1,0 +1,12 @@
+- hosts: lb
+- tasks:
+    - package:
+        name: "haproxy"
+        state: "present"
+    - template:
+        src: "local.cfg.j2"
+        dest: "/etc/haproxy/haproxy.cfg"
+    - service:
+        name: "haproxy"
+        state: "restarted"
+        enabled: true

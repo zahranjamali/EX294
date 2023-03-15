@@ -1,0 +1,15 @@
+- hosts: web
+- tasks:
+    - package:
+        name: "{{ item }}"
+        state: "present"
+      loop:
+        - "httpd"
+        - "php"
+    - copy:
+        src: "index.php"
+        dest: "/var/www/html/"
+    - service:
+        name: "httpd"
+        state: "started"
+        enabled: true
